@@ -1,0 +1,16 @@
+<div *ngIf="fishStore.fishes.length > 0">
+    <mat-card class="region-card" 
+        *ngFor="let region of fishStore.regions; trackBy: trackByRegionId">
+        <mat-card-header>
+            <mat-card-title>{{region.name}}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div>Average Calories: {{region.averageCalories}}</div>
+            <div>Average Fat: {{region.averageFat}}</div>
+        </mat-card-content>
+        <mat-card-actions>
+            <a mat-button href="{{'/region/' + region.id }}">View Region</a>
+        </mat-card-actions>
+    </mat-card>
+</div>
+<div *ngIf="fishStore.fishes.length <= 0">Loading...</div>

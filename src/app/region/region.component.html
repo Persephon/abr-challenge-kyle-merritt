@@ -1,0 +1,35 @@
+<div *ngIf="region">
+  <div class="region-info">
+    <h1>{{ region.name }}</h1>
+    <div>Average Calories: {{ region.averageCalories }}</div>
+    <div>Average Fat: {{ region.averageFat }}</div>
+  </div>
+
+  <mat-card class="fish-card" *ngFor="let fish of fishesList">
+    <mat-card-header>
+      <mat-card-title>{{ fish.name }}</mat-card-title>
+    </mat-card-header>
+    <!-- KM, 5/24/2023 TODO: clarify requirements for images. Do we want photographs or illustrations? -->
+    <!-- <div class="images-container"
+        *ngIf="fish.images.length > 0">
+        <img mat-card-md-image 
+            *ngFor="let image of fish.images"
+            [src]="image.src">
+    </div> -->
+    <div class="images-container">
+        <img mat-card-image 
+            width="400"
+            [src]="fish.illustration.src">
+    </div>
+    <mat-card-content>
+        <div>
+            <h3>Nutritional Information</h3>
+            <div>Calories Per Serving: {{ fish.calories }}</div>
+            <div>Fat Per Serving: {{ fish.fat }}</div>
+        </div>
+        <div><h3>Health Benefits</h3><div [innerHTML]="fish.healthBenefits"></div></div>
+        <div><h3>Location</h3><div [innerHTML]="fish.location"></div></div>
+    </mat-card-content>
+  </mat-card>
+</div>
+<div *ngIf="!region">Loading...</div>

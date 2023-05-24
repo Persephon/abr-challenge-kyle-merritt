@@ -1,0 +1,12 @@
+<mat-toolbar color="primary">
+  <a href="/" mat-button>
+    <mat-icon>home</mat-icon>
+    <span>Home</span>
+  </a>
+  <a mat-button [mat-menu-trigger-for]="dropdown">Regions</a>
+  <mat-menu #dropdown>
+    <a mat-menu-item *ngFor="let region of fishStore.regions; trackBy: trackByRegionId" href="{{'/region/' + region.id }}">
+        {{ region.name }}
+    </a>
+  </mat-menu>
+</mat-toolbar>
