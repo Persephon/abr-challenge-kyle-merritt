@@ -1,7 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { IFishStore } from './store/fish.store';
-import { StoreService } from './store/store.service';
-import { IFish } from './store/fish';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',

@@ -1,9 +1,11 @@
 import { types, Instance } from 'mobx-state-tree';
 import { Fish, IFish } from './fish';
+import { AppRoute } from './route';
 
 export const FishStore = types
   .model({
     fishes: types.array(Fish),
+    route: AppRoute
   })
   .views((self) => {
     function roundToHundredths(value: number): number {
@@ -53,6 +55,9 @@ export const FishStore = types
       },
       getRegionById(id: number): IRegionInfo | undefined {
         return getRegions().find((region) => id === region.id);
+      },
+      get currentRegion(): IRegionInfo {
+        return getRegions().find((region) => parseInt(self.route.parameter ?? '0') === region.id) ?? getRegions()[0];
       },
       getFishesByRegionName(regionName: string): Array<IFish> {
         return self.fishes.filter((fish) => fish.region === regionName);

@@ -10,7 +10,7 @@ import { IFish } from '../store/fish';
   templateUrl: './region.component.html',
   styleUrls: ['./region.component.scss']
 })
-export class RegionComponent implements OnInit {
+export class RegionComponent {
   fishStore: IFishStore;
   region: IRegionInfo | undefined;
   fishesList: Array<IFish> = [];
@@ -18,15 +18,11 @@ export class RegionComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private storeService: StoreService) {
     this.fishStore = storeService.fishStore;
-  }
-
-  ngOnInit() {
-
     this.storeService.fishStoreChanged
       .pipe(takeUntil(this.destroy$))
       .subscribe((store) => {
         this.fishStore = store;
-        this.region = this.fishStore.getRegionById(parseInt(this.route.snapshot.params['id']));
+        this.region = this.fishStore.currentRegion;
 
         if (!this.region) {
           console.error(`region with id ${parseInt(this.route.snapshot.params['id'])} not found`)
